@@ -205,7 +205,9 @@ static void test_dyck_isomorphism()
 #ifndef SPEC
 static void test_dyck_reduction()
 {
-  mr_dyck_node d0,d1,d2,d3,d4,d5,d6,d7,d8,d9;//,d10,d11;
+  mr_dyck_node d0,d1,d2,d3,d4,d5,
+  //d6,
+  d7,d8,d9;//,d10,d11;
 
 // flag_mr_dyck_print_constraints = 1;
   
@@ -215,7 +217,7 @@ static void test_dyck_reduction()
   d3 = make_tagged_mr_dyck_node("d3");
   d4 = make_tagged_mr_dyck_node("d4");
   d5 = make_tagged_mr_dyck_node("d5");
-  d6 = make_tagged_mr_dyck_node("d6");
+  //d6 = make_tagged_mr_dyck_node("d6");
   d7 = make_tagged_mr_dyck_node("d7");  
   d8 = make_tagged_mr_dyck_node("d8");
   d9 = make_tagged_mr_dyck_node("d9");
