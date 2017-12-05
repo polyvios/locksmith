@@ -63,7 +63,7 @@ int main() {
   char buf[20];
   int n1, n2, i, j;
   region r;
-  double t1, t2;
+  //double t1, t2;
 
   nonspec_init();
   dyck_init(TRUE);
@@ -72,15 +72,15 @@ int main() {
     nodes[i] = NULL;
   }
 
-  t1 = gettime();
+  //t1 = gettime();
   fp = fopen("graph.txt", "r");
   if (fp == NULL) exit(EXIT_FAILURE);
   while ((fgets(line, 100, fp)) != NULL) {
     if (j % 1000 == 0) {
-      t2 = gettime();
+      //t2 = gettime();
       //printf("1000 lines in %f seconds: ", t2 - t1); fflush(stdout);
       printf("%s", line); fflush(stdout);
-      t1 = t2;
+      //t1 = t2;
     }
     j++;
     switch(line[0]) {
