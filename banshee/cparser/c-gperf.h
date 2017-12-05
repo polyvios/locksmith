@@ -152,7 +152,7 @@ static struct resword wordlist[] =
   };
 
 #ifdef __GNUC__
-__inline
+inline
 #endif
 struct resword *
 is_reserved_word (str, len)
