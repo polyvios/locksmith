@@ -446,7 +446,7 @@ void term_rollback(banshee_rollback_info info)
 
   term_rollback_info tinfo = (term_rollback_info)info;
   
-  assert(tinfo->kind = term_sort);
+  assert(tinfo->kind == term_sort);
   
   hash_table_scan(tinfo->added_edges, &hash_scan);
   while(hash_table_next(&hash_scan,(hash_key *)&st,
