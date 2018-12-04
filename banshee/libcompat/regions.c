@@ -383,7 +383,8 @@ static FILE *out;
 
 static void printref(void *x)
 {
-  if (x >= (void *)__rcregionmap && x < (void *)&__rcregionmap[RMAXMAP]) return;
+  if (x >= (void *)__rcregionmap && x < (void *)&__rcregionmap[RMAXMAP])
+    return;
 
 #ifdef RCPAIRS
   if (x >= (void *)__rcregions && x < (void *)&__rcregions[MAXREGIONS])

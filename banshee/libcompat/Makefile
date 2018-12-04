@@ -28,7 +28,7 @@
 #CC=gcc
 
 ifdef DEBUG_RALLOC
-CFLAGS = -g -pg -Wall -Ddeletes="" -DDEBUG_RALLOC -DNDEBUG -DNMEMDEBUG  -Werror -fno-common
+CFLAGS = -g -pg -Wall -Ddeletes="" -DDEBUG_RALLOC -DDEBUG -DMEMDEBUG  -Werror -fno-common
 else
 CFLAGS = -Wall -Ddeletes="" -DNMEMDEBUG -DNDEBUG -Werror -fno-common
 endif

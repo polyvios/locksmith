@@ -282,10 +282,10 @@ bool funptr_data_serialize(FILE *f, void *obj)
 void *funptr_data_deserialize(FILE *f)
 {
   int id = 0;
-  int success;
+  int success = 1;
   assert(f);
 
-  success = fread((void *)&id, sizeof(int), 1, f);
+  success &= fread((void *)&id, sizeof(int), 1, f);
   assert(success);
 
   return fn_ptr_array[id];
@@ -303,20 +303,23 @@ bool funptr_data_set_fields(void *obj)
 
 bool string_data_serialize(FILE *f, void *obj)
 {
-  int length = (int) strlen((char *)obj);
+  int success = 1;
+  int length = strlen((char *)obj);
   /* write the string length */
-  fwrite((void *)&length, sizeof(int), 1, f);
-  fwrite((void *)obj, sizeof(char),strlen((char *)obj), f);
+  success &= fwrite((void *)&length, sizeof(length), 1, f);
+  success &= fwrite((void *)obj, sizeof(char), strlen((char *)obj), f);
+  assert(success);
 
   return TRUE;
 }
 
 void *string_data_deserialize(FILE *f)
 {
-  int length = 0, success;
+  int length;
+  int success = 1;
   char buf[512];
 
-  success = fread((void *)&length, sizeof(int), 1, f);
+  success &= fread((void *)&length, sizeof(length), 1, f);
   assert(length < 512);
   success &= (fread((void *)buf, sizeof(char), length, f) == length);
   assert(success);

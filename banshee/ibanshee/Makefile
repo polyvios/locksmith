@@ -34,7 +34,7 @@ region_dir = ../libcompat
 all: ibanshee.exe
 
 ibanshee.exe: parser.tab.c lex.yy.c
-	$(CC) -DNONSPEC -Ddeletes= -Dtraditional= -Dsameregion= \
+	$(CC) $(CFLAGS) -DNONSPEC -Ddeletes= -Dtraditional= -Dsameregion= \
 	 -Dparentptr=  -o ibanshee.exe lex.yy.c parser.tab.c -I../engine -I$(region_dir) -L../engine -L$(region_dir) -lnsengine -lregions -lfl 
 	cp ibanshee.exe ../bin
 

@@ -60,10 +60,15 @@ static edge new_edge(region r, int kind, node info, node from, node to,
     FALSE, /* edge_return_expr */
     TRUE,  /* edge_return */
     TRUE,  /* edge_comma */
+    FALSE, /* edge_init_list_comma */
+    FALSE, /* edge_cast_list */
     FALSE, /* edge_conditional_true */
     FALSE, /* edge_conditional_true_done */
     FALSE, /* edge_conditional_false */
     FALSE, /* edge_conditional_false_done */
+    FALSE, /* edge_short_second */
+    FALSE, /* edge_short_circuit */
+    FALSE, /* edge_short_done */
     FALSE, /* edge_function_call */
     FALSE, /* edge_unary */
     FALSE, /* edge_unary_lvalue */

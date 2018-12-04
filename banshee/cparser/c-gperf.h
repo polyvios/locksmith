@@ -151,9 +151,6 @@ static struct resword wordlist[] =
     {"short", TYPESPEC, RID_SHORT}
   };
 
-#ifdef __GNUC__
-inline
-#endif
 struct resword *
 is_reserved_word (str, len)
      register const char *str;

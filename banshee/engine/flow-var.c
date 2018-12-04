@@ -278,6 +278,7 @@ bool contour_serialize(FILE *f, void *obj)
   fwrite((void *)&c->fresh, sizeof(fresh_fn_ptr), 1, f);
   fwrite((void *)&c->get_stamp, sizeof(get_stamp_fn_ptr), 1, f);
   fwrite((void *)&c->instantiate, sizeof(contour_inst_fn_ptr), 1, f);
+
   serialize_banshee_object(c->shape, gen_e);
   serialize_banshee_object(c->fresh, funptr);
   serialize_banshee_object(c->get_stamp, funptr);

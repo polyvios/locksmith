@@ -142,10 +142,10 @@ bool bounds_serialize(FILE *f, void *obj)
 void *bounds_deserialize(FILE *f)
 {
   bounds b = ralloc(bounds_region, struct bounds_);
-  int success;
+  int success = 1;
 
   assert(f);
-  success = fread(b, sizeof(struct bounds_), 1, f);
+  success &= fread(b, sizeof(struct bounds_), 1, f);
   assert(success);
 
   return b;
@@ -183,10 +183,10 @@ void *added_edge_info_deserialize(FILE *f)
 {
   added_edge_info info = 
     ralloc(added_edge_info_region, struct added_edge_info_);
-  int success;
+  int success = 1;
 
   assert(f);
-  success = fread(info, sizeof(struct added_edge_info_), 1, f);
+  success &= fread(info, sizeof(struct added_edge_info_), 1, f);
   assert(success);
 
   return info;

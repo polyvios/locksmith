@@ -20,6 +20,7 @@ Boston, MA 02111-1307, USA.  */
 #define ANALYSIS_H
 
 #include "andersen_terms.h"
+#include "banshee_region_persist_kinds.h"
 
 extern int flag_field_based;
 
@@ -32,6 +33,7 @@ void print_analysis_results(void) deletes;
 void print_points_to_sets(void);
 void analysis_print_graph(void);
 void analysis_serialize(const char *filename);
+void analysis_deserialize(const char *filename);
 void analysis_backtrack(int);
 void analysis_region_serialize(const char *filename);
 void analysis_region_deserialize(translation t, const char *filename);

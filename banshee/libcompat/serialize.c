@@ -110,7 +110,7 @@ void serialize_pages(struct page_list *pgs, int data, int state, INT_PTR first_p
    used += ((INT_PTR) pgs->pg->available) - ((INT_PTR) pgs->pg);
    total += ps.size;
    fprintf(stderr,
-	   "\t\tWriting page: address %x\tsize %d\tuses %d bytes.\n",
+	   "\t\tWriting page: address %zx\tsize %d\tuses %zd bytes.\n",
 	   (INT_PTR) ps.old_address,
 	   ps.size,
 	   ((INT_PTR) pgs->pg->available) - ((INT_PTR) pgs->pg));
@@ -353,7 +353,7 @@ void deserialize_pages(int data, int state, translation map, Updater *update) {
     }
 #ifndef NMEMDEBUG
     fprintf(stderr,
-	    "\t\tDeserializing page: \told address %x\tnew address %x\tsize %d\tused %d\n",
+	    "\t\tDeserializing page: \told address %zx\tnew address %zx\tsize %d\tused %zd\n",
 	    (INT_PTR) ps.old_address,
 	    (INT_PTR) newp,
 	    ps.size,

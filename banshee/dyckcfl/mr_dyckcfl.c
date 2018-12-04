@@ -105,7 +105,7 @@ static void check_erroneous_edges(void)
   mr_dyck_node_list_scan(mr_erroneous_sources,&scan);
   
   while(mr_dyck_node_list_next(&scan,&next_source)) {
-    state = mr_dyck_query;  // HACK to allow queries here
+    state = mr_dyck_query; // HACK to allow queries here
     if (mr_dyck_check_reaches(next_source,mr_erroneous_sink)) {
       found = TRUE;
       expr_print(stdout, next_source->node_constant);
@@ -126,7 +126,7 @@ static bool relevant_constraint(int num)
     return TRUE;
   {
     relevant_constraint_list_scanner scan;
-    INT_PTR next = 0;
+    INT_PTR next;
 
     relevant_constraint_list_scan(relevant_constraints, &scan);
 
@@ -399,6 +399,7 @@ mr_dyck_node make_tagged_mr_dyck_node(const char *name)
   return result;
 }
 
+
 mr_dyck_node make_untagged_mr_dyck_node(const char *name)
 {
   static int count = 0;
@@ -467,14 +468,10 @@ void make_mr_dyck_open_edge(mr_dyck_node n1, mr_dyck_node n2, int index)
  
   exps[0] = n2->node_variable;
   
-  mr_call_setif_inclusion(
-    constructor_expr(get_constructor(index,mr_o), exps, 1),
-    n1->node_variable);
+  mr_call_setif_inclusion(constructor_expr(get_constructor(index,mr_o), exps, 1), n1->node_variable);
 
   if (pn_reach) {
-    mr_call_setif_inclusion(
-      constructor_expr(mr_n_constructor,exps, 1), 
-      n1->node_variable);
+    mr_call_setif_inclusion(constructor_expr(mr_n_constructor,exps, 1), n1->node_variable);
   }
 }
 
@@ -485,13 +482,10 @@ void make_mr_dyck_close_edge(mr_dyck_node n1, mr_dyck_node n2, int index)
  
   exps[0] = n2->node_variable;
   
-  mr_call_setif_inclusion(
-    constructor_expr(get_constructor(index, mr_c), exps, 1),
-    n1->node_variable);
+  mr_call_setif_inclusion(constructor_expr(get_constructor(index, mr_c), exps, 1), n1->node_variable);
 
   if (pn_reach) {
-    mr_call_setif_inclusion(constructor_expr(mr_p_constructor,exps, 1), 
-      n1->node_variable);
+    mr_call_setif_inclusion(constructor_expr(mr_p_constructor,exps, 1), n1->node_variable);
   }
 }
 

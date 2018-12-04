@@ -89,12 +89,12 @@ void output_updptr_profile(update_rc rcop)
       prt_regionof(rcop->arg1);
       output(" == ");
       prt_regionof(rcop->arg2);
-      output(" ? rcs_profile(%d, \"%s\", %d, %d + (&zeroregion != ",
+      output(" ? rcs_profile(%d, \"%s\", %d, %d + (&permanent != ",
 	     profile_cnt++, cloc.filename, cloc.lineno, pupd_equal);
       prt_regionof_name(cname);
       outputln("), 0, 0) :");
     }
-  output("rcs_profile(%d, \"%s\", %d, %d + (&zeroregion != ",
+  output("rcs_profile(%d, \"%s\", %d, %d + (&permanent != ",
 	 profile_cnt++, cloc.filename, cloc.lineno, kind);
   prt_regionof_name(cname);
   output("), __rcupdcat(");

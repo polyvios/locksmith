@@ -31,6 +31,7 @@
 
 /* Parser for iBanshee */
 %{
+#include <string.h>
 #include "nonspec.h"
 #include "regions.h"
 #include "hash.h"
@@ -45,6 +46,9 @@ static int interactive = 1;
 static sort_kind current_row_base_sort;
 
 extern FILE *yyin;
+
+int yylex();
+void yyerror(const char *s);
 
 void ibanshee_error_handler(gen_e e1, gen_e e2, banshee_error_kind bek) 
 {

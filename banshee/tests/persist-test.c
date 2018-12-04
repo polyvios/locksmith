@@ -229,7 +229,7 @@ static void pt_deserialize()
   if (n->left->right != n->left->left) {
     fail("n2's children were not deserialized correctly.\n");
   }
-  if (n->right->left != n->right->left) {
+  if (n->right->left != n->left->right) {
     fail("n3's children were not deserialized correctly.\n");
   }
   if (n->left->left != n->right->left) {

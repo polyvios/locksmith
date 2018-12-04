@@ -86,4 +86,4 @@ TICK [\']
 .
 %%
 
-yyerror( char *msg ) { fprintf( stderr, "%s\n", msg ); }
+void yyerror( char *msg ) { fprintf( stderr, "%s\n", msg ); }

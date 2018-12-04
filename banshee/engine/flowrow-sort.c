@@ -1310,7 +1310,7 @@ void flowrow_rollback(banshee_rollback_info info)
   
   flowrow_rollback_info rinfo = (flowrow_rollback_info)info;
   
-  assert(rinfo->kind = flowrow_sort);
+  assert(rinfo->kind == flowrow_sort);
   
   hash_table_scan(rinfo->added_edges, &hash_scan);
   while(hash_table_next(&hash_scan,(hash_key *)&st,
@@ -1345,14 +1345,14 @@ bool flowrow_field_serialize(FILE *f, void *obj)
 
 void *flowrow_field_deserialize(FILE *f)
 {
-  int success;
+  int success = 1;
   flowrow_field result;
   assert(f);
   
   result = ralloc(flowrow_field_region, struct flowrow_field_);
 
   result->label = (char *)string_data_deserialize(f);
-  success = fread(&result->expr, sizeof(gen_e), 1 ,f);
+  success &= fread(&result->expr, sizeof(gen_e), 1 ,f);
   assert(success);
   
   return result;
@@ -1386,15 +1386,15 @@ bool flowrow_rollback_serialize(FILE *f, banshee_rollback_info i)
 
 banshee_rollback_info flowrow_rollback_deserialize(FILE *f)
 {
-  int success;
+  int success = 1;
   flowrow_rollback_info info = 
     ralloc(flowrow_rollback_info_region, struct flowrow_rollback_info_);
   
   assert(f);
 
-/*   success = fread((void *)&info->added_edges, sizeof(hash_table), 1, f); */
+/*   success &= fread((void *)&info->added_edges, sizeof(hash_table), 1, f); */
 /*   success &= fread((void *)&info->set_aliases, sizeof(flow_var_list), 1, f); */
-  success = fread(&info->added_edges, sizeof(hash_table) + sizeof(flow_var_list), 1, f);
+  success &= fread(&info->added_edges, sizeof(hash_table) + sizeof(flow_var_list), 1, f);
   assert(success);
 
   return (banshee_rollback_info)info;
@@ -1465,8 +1465,8 @@ void *flowrow_expr_deserialize(FILE *f)
 #ifdef NONSPEC      
 	success &= fread(&frow->base_sort, sizeof(int), 1, f);
 #endif
-/* 	success = fread((void *)&frow->fields, sizeof(flowrow_map), 1, f); */
-/* 	success = fread((void *)&frow->rest, sizeof(gen_e), 1, f); */
+/* 	success &= fread((void *)&frow->fields, sizeof(flowrow_map), 1, f); */
+/* 	success &= fread((void *)&frow->rest, sizeof(gen_e), 1, f); */
 	success &= fread(&frow->fields, sizeof(flowrow_map) + sizeof(gen_e), 1, f);
   assert(success);
 	frow->type = type;

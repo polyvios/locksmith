@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.  */
 
 int exec_cc1(declaration the_program) deletes
 {
+  int success = 1;
   int channel[2];
   int cc1pid, cc1stat, memhack, res;
   FILE *cc1input;
@@ -36,12 +37,12 @@ int exec_cc1(declaration the_program) deletes
   if (!cc1path)
     cc1path = CC1PATH;
 
-  pipe(channel);
+  success &= pipe(channel);
 
   if ((cc1pid = fork()) == 0)
     {
       close(0);
-      dup(channel[0]);
+      success &= dup(channel[0]);
       close(channel[0]);
       close(channel[1]);
 #if 0
@@ -55,6 +56,7 @@ int exec_cc1(declaration the_program) deletes
 #endif
       execv(cc1path, copy_argv);
     }
+  assert(success);
   if (cc1pid < 0)
     perror("failed to fork");
   close(channel[0]);

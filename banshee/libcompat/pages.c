@@ -41,7 +41,7 @@ static size_t total_page_count; /* total pages allocated */
 #if 0
 #define FREEPAGE ((region)-1) /* Id of a free page */
 #else
-#define FREEPAGE (&zeroregion)
+#define FREEPAGE (&permanent)
 #endif
 #ifdef NMEMDEBUG
 #define ASSERT_FREE(p) 
@@ -329,12 +329,13 @@ void set_region_range(void *from, void *to, region r)
          lastp = PAGENB((pageid)to - 1),
          lastm = MAPNB((pageid)to - 1);
 
-  while (firstm < lastm || firstp <= lastp)
+  while (firstm < lastm || firstp <= lastp) {
     if(firstp >= RMAXPAGE) {
       firstm++;
       firstp -= RMAXPAGE;
     }
     set_page_region(firstm, firstp++, r);
+  }
 }
 
 /* Multi-page allocation management */
@@ -385,7 +386,7 @@ struct page *alloc_new(int n, struct page *next)
   if (!newp)
     {
       if (nomem_h)
-      nomem_h();
+        nomem_h();
       abort();
     }
   assert(!((long)newp & (RPAGESIZE - 1)));

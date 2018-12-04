@@ -443,7 +443,7 @@ typelist make_arg_types(bool definition, declaration parameters, bool *varargs)
   typelist arg_types = new_typelist(parse_region);
 
   *varargs = FALSE;
-  if (!is_void_parms(parameters))
+  if (!is_void_parms(parameters)) {
     scan_declaration (parameter, parameters)
       if (is_ellipsis_decl(parameter))
 	*varargs = TRUE;
@@ -467,7 +467,7 @@ typelist make_arg_types(bool definition, declaration parameters, bool *varargs)
 	    error_with_decl(dp->decls, "parameter name omitted");
 	  typelist_append(arg_types, vp->ddecl->type);
 	}
-
+  }
   return arg_types;
 }
 

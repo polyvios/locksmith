@@ -248,14 +248,14 @@ bool setif_var_serialize(FILE *f, void *obj)
 
 void *setif_var_deserialize(FILE *f)
 {
-  int success;
+  int success = 1;
   setif_var var;
   assert(f);
 
   var = ralloc(setif_var_region, struct setif_var_);
 
   var->type = VAR_TYPE;
-  success = fread(&var->elt, sizeof(var->elt), 1, f);
+  success &= fread(&var->elt, sizeof(var->elt), 1, f);
   assert(success);
 
   return var;
@@ -301,7 +301,7 @@ bool sv_info_serialize(FILE *f, void *obj)
 
 void *sv_info_deserialize(FILE *f)
 {
-  int success;
+  int success = 1;
   sv_info info = ralloc(sv_info_region, struct sv_info_);
   assert(f);
   assert(permanent);
@@ -311,7 +311,7 @@ void *sv_info_deserialize(FILE *f)
 /*   fread((void *)&info->ubs, sizeof(bounds), 1, f); */
 /*   fread((void *)&info->ub_projs, sizeof(gen_e_list), 1, f); */
 /*   fread((void *)&info->component, sizeof(uf_element), 1, f); */
-  success = fread(&info->st, sizeof(stamp) + sizeof(bounds) *2 + sizeof(gen_e_list) + sizeof(uf_element), 1, f);
+  success &= fread(&info->st, sizeof(stamp) + sizeof(bounds) *2 + sizeof(gen_e_list) + sizeof(uf_element), 1, f);
   assert(success);
 
   info->name = string_data_deserialize(f);

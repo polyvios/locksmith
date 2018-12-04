@@ -848,9 +848,8 @@ int main(int argc, char **argv) deletes
   /*  char *filename = 0; */
   dd_list files;
   dd_list_pos cur;
-  int version_flag = 0;
   char *p;
-  char *input_pat;
+  /* char *input_pat; */
   region main_region;
   region_init();
 
@@ -980,8 +979,6 @@ int main(int argc, char **argv) deletes
 	    flag_pedantic_errors = pedantic = 1;
 	  else if (!strcmp (str, "quiet"))
 	    quiet_flag = 1;
-	  else if (!strcmp (str, "version"))
-	    version_flag = 1;
 	  else if (!strcmp (str, "w"))
 	    inhibit_warnings = 1;
 	  else if (!strcmp (str, "W"))
@@ -1080,7 +1077,7 @@ int main(int argc, char **argv) deletes
 	  glob_t globbuf;
 	  char **cur;
 	  
-	  input_pat = argv[i];
+	  /* input_pat = argv[i]; */
 	  
 	  if (glob(argv[i], GLOB_NOSORT, NULL, &globbuf)) 
 	    {
@@ -1140,10 +1137,10 @@ int main(int argc, char **argv) deletes
     }
   else if (flag_points_to && flag_debug_region_deserialization)
     {
-      translation t;
+      /* translation t; */
       region temp = newregion();
       begin_time();
-      t = deserialize("data","offsets", get_updater_functions("extras"), temp);
+      /*t = */ deserialize("data","offsets", get_updater_functions("extras"), temp);
       end_time(&region_deserialization_time);
 
       printf("\nRegion deserialization time: ");

@@ -365,7 +365,7 @@ int name ## _length(name a) \
 } \
 name name ## _cons(type data, name a) \
 { \
- return (name)list_cons((void *)data,(struct list *) a ); \
+ return (name)list_cons((void *)(INT_PTR)data,(struct list *) a ); \
 }\
 name name ## _append(name a, name b) \
 { \
@@ -373,7 +373,7 @@ name name ## _append(name a, name b) \
 } \
 name name ## _append_tail(type data, name a) \
 {\
-  return (name)list_append_tail((void *)data,(struct list *) a); \
+  return (name)list_append_tail((void *)(INT_PTR)data,(struct list *) a); \
 } \
 name name ## _app(name a, name ## _app_fn app) \
 { \
@@ -381,7 +381,7 @@ name name ## _app(name a, name ## _app_fn app) \
 } \
 type name ## _find(name a, name ## _eq_fn eq) \
 { \
- return (type)list_find((struct list *)a, (eq_fn) eq); \
+ return (type)(INT_PTR)list_find((struct list *)a, (eq_fn) eq); \
 } \
 name name ## _tail(name a) \
 {\
@@ -389,11 +389,11 @@ name name ## _tail(name a) \
 }\
 type name ## _head(name a) \
 { \
- return (type)list_head((struct list *)a); \
+ return (type)(INT_PTR)list_head((struct list *)a); \
 } \
 type name ## _last(name a) \
 {\
-  return (type)list_last((struct list *)a);\
+  return (type)(INT_PTR)list_last((struct list *)a);\
 }\
 void name ## _drop(name a, name ## _eq_fn eq) \
 { \
@@ -445,7 +445,7 @@ void name ## _clear(name a) \
 } \
 bool name ## _member(name a, type data) \
 { \
- return list_member((struct list *)a,(void *)data); \
+ return list_member((struct list *)a,(void *)(INT_PTR)data); \
 } \
 name name ## _reverse(name a) \
 {\

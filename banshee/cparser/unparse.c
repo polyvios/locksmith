@@ -559,7 +559,7 @@ void prt_qualifier(qualifier q)
   /* We drop all const's in the output to allow initialisers to be moved to
      the start of the block. This is not a big issue, as we have already
      type-checked the input program. */
-  if (q->id == volatile_qualifier || (q->id == const_qualifier && allow_const_evil_hack))
+  if ((int)q->id == (int)volatile_qualifier || ((int)q->id == (int)const_qualifier && allow_const_evil_hack))
     {
       set_location(q->location);
       output("%s", qualifier_name(q->id));
@@ -1158,7 +1158,7 @@ void prt_globalrc_adjust(char *by)
   if (rc_pairs_array)
     output("[__rcs[0]]"); /* Remember, a[b] is the same as b[a] */
   else if (rc_pairs_from)
-    output("->id[zeroregion.rc]"); /* Remember, a[b] is the same as b[a] */
+    output("->id[permanent.rc]"); /* Remember, a[b] is the same as b[a] */
   else if (rc_pairs)
     output("->rc[0]");
   else
@@ -1323,7 +1323,7 @@ void prt_update_rc(update_rc rcop, int context_priority)
       if (rc_keepchecks || !(rc_nochecks || known_traditional_write(brcop)))
 	{
 	  prt_regionof(rcop->arg2);
-	  output(" != &zeroregion ? abort() : 0, ");
+	  output(" != &permanent ? abort() : 0, ");
 	}
     }
   else if (type_sameregion(of->type))
@@ -1468,7 +1468,7 @@ void prt_global_rc(global_rc rcop, int context_priority)
 	{
 	  output(", ");
 	  prt_regionof(dest);
-	  output(" != &zeroregion ? abort() : 0");
+	  output(" != &permanent ? abort() : 0");
 	}
     }
   else if (known_traditional_write(brcop) || zero_expression(src))

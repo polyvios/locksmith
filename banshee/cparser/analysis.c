@@ -895,10 +895,10 @@ static expr_type analyze_expression(expression e) deletes
     case kind_conditional:
       {
 	conditional c = CAST(conditional, e);
-	expr_type cond, arg1, arg2;
+	expr_type /* cond, */ arg1, arg2;
 	type c_type;
 	
-	cond = promote_to_ptr(analyze_expression(c->condition));
+	/* cond = */ promote_to_ptr(analyze_expression(c->condition));
 	arg1 = promote_to_ptr(analyze_expression(c->arg1));
 	arg2 = promote_to_ptr(analyze_expression(c->arg2));
 	
@@ -1590,30 +1590,35 @@ static void write_int_list(FILE *f, int_list l)
 
 static int_list read_int_list(FILE *f)
 {
+  int success = 1;
   int_list result;
   int length,i,next;
   assert(f);
 
   result = new_int_list(permanent);
 
-  fread((void *)&length, sizeof(int), 1, f);
+  success &= fread((void *)&length, sizeof(length), 1, f);
 
   for (i = 0; i < length; i++) {
-    fread((void *)&next, sizeof(int), 1, f);
+    success &= fread((void *)&next, sizeof(next), 1, f);
     int_list_append_tail(next, result);
   }
+  assert(success);
   return result;
 }
 
 void analysis_serialize(const char *filename)
 {
+  int success = 1;
   hash_table *entries;
   int length;
   FILE *f = fopen(filename, "wb");
   
   assert(f);
   
-  fwrite((void *)&acnt, sizeof(struct counts), 1, f);
+  success &= fwrite((void *)&acnt, sizeof(struct counts), 1, f);
+  assert(success);
+  
   write_int_list(f,state.scopes);
   write_int_list(f,state.collection_counts);
   write_int_list(f,state.string_counts);
@@ -1652,12 +1657,14 @@ void analysis_region_serialize(const char *filename)
 
 void analysis_region_deserialize(translation t, const char *filename)
 {
+  int success = 1;
   FILE *f = fopen(filename, "rb");
   assert(f);
 
-  fread((void *)&state, sizeof(struct persistence_state), 1, f);
-  fread((void *)&acnt, sizeof(struct counts), 1, f);
-  fread((void *)&global_var_hash, sizeof(hash_table), 1, f);
+  success &= fread((void *)&state, sizeof(struct persistence_state), 1, f);
+  success &= fread((void *)&acnt, sizeof(struct counts), 1, f);
+  success &= fread((void *)&global_var_hash, sizeof(hash_table), 1, f);
+  assert(success);
   //update_pointer(t, (void **)&collection_hash);
   update_pointer(t, (void **)&state.scopes);
   update_pointer(t, (void **)&state.collection_counts);
@@ -1675,6 +1682,7 @@ void analysis_region_deserialize(translation t, const char *filename)
 
 void analysis_deserialize(const char *filename)
 {
+  int success = 1;
   int length,i;
   hash_table *result;
   hash_table_list collection_envs;
@@ -1682,7 +1690,8 @@ void analysis_deserialize(const char *filename)
   assert(f);
 
   
-  fread((void *)&acnt, sizeof(struct counts), 1, f);
+  success &= fread((void *)&acnt, sizeof(struct counts), 1, f);
+  assert(success);
   state.scopes = read_int_list(f);
   state.collection_counts = read_int_list(f);
   state.string_counts = read_int_list(f);
@@ -1709,7 +1718,7 @@ void print_analysis_results() deletes
 {
   contents_type_list ptset_list;
   region temp_region;
-  struct list *visibles;
+  /* struct list *visibles; */
   contents_type ptset, ttype;
   char *name;
   contents_type_list_scanner scan;
@@ -1720,7 +1729,7 @@ void print_analysis_results() deletes
     num_vars = 0;
   temp_region = newregion();
   ptset_list = new_contents_type_list(temp_region);
-  visibles = new_list(temp_region,0);
+  /* visibles = new_list(temp_region,0); */
  
   hash_table_scan(collection_hash, &hs);
   while(hash_table_next(&hs, (hash_key*)&name, (hash_data *)&ttype)) {
@@ -1767,8 +1776,6 @@ void print_points_to_sets()
   }
 
 }
-
-void register_persistent_region(region r, Updater u);
 
 int update_var_info(translation t, void *m)
 {

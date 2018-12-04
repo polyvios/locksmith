@@ -105,7 +105,7 @@ void qalloc(region r, struct allocator *a, void **p1, int s1, int a1,
        valid) */
     if (mem2 + s2 < a->page.base + RPAGESIZE)
       {
-	ASSERT_INUSE(blk->base, r);
+        ASSERT_INUSE(a->page.base, r);
 	a->page.allocfrom = mem2 + s2;
 
 	*p1 = mem1;

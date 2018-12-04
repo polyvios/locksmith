@@ -539,10 +539,10 @@ static bool dyck_check_pn_reaches_aux(gen_e target, gen_e current,
 	else if (target && expr_eq(target,current)) return TRUE;
 
 // Already searched from this point
-	if (hash_table_lookup(visited, (void *)expr_stamp(current), NULL)) return FALSE;
+	if (hash_table_lookup(visited, (void *)(INT_PTR)expr_stamp(current), NULL)) return FALSE;
 
 // Otherwise, mark this node visited
-	hash_table_insert(visited,(void *)expr_stamp(current),(void *)expr_stamp(current));
+	hash_table_insert(visited,(void *)(INT_PTR)expr_stamp(current),(void *)(INT_PTR)expr_stamp(current));
 
 // Compute this node's transitive lower bounds
 	{

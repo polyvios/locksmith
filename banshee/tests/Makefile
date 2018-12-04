@@ -51,9 +51,14 @@ endif
 
 TAGFILES = $(wildcard *.c) $(wildcard *.h)
 
-EXES = lambda-test.exe dyckcfl-random-test.exe \
-       uf-bt-test.exe persist-test.exe dyckcfl-test.exe regexp-test.exe \
-	region-persist-test.exe dyckcfl-spec-test.exe
+EXES = lambda-test.exe \
+	dyckcfl-random-test.exe \
+	uf-bt-test.exe \
+	dyckcfl-test.exe \
+	regexp-test.exe \
+	region-persist-test.exe \
+	dyckcfl-spec-test.exe
+	#persist-test.exe \
 
 TARGETS =  $(EXES) 
 

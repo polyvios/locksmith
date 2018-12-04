@@ -471,12 +471,12 @@ bool term_rollback_serialize(FILE *f, banshee_rollback_info i)
 
 banshee_rollback_info term_rollback_deserialize(FILE *f)
 {
-  int success;
+  int success = 1;
   term_rollback_info info = ralloc(term_rollback_info_region, 
 				   struct term_rollback_info_);
   assert(f);
 
-  success = fread((void *)&info->added_edges, sizeof(void *), 1, f);
+  success &= fread((void *)&info->added_edges, sizeof(void *), 1, f);
   assert(success);
 
   return (banshee_rollback_info)info;
@@ -505,11 +505,11 @@ bool term_constant_serialize(FILE *f, gen_e e)
 
 void *term_constant_deserialize(FILE *f)
 {
-  int success;
+  int success = 1;
   term_constant_ c = ralloc(term_constant_region, struct term_constant_);
   assert(f);
 
-  success = fread((void *)&c->st, sizeof(stamp), 1, f);
+  success &= fread((void *)&c->st, sizeof(stamp), 1, f);
   assert(success);
   c->name = (char *)string_data_deserialize(f);
   
@@ -527,9 +527,9 @@ void term_serialize(FILE *f)
 
 void term_deserialize(FILE *f)
 {
-  int success;
+  int success = 1;
   assert(f);
-  success = fread((void *)&flag_occurs_check, sizeof(bool), 1, f);
+  success &= fread((void *)&flag_occurs_check, sizeof(bool), 1, f);
   success &= fread((void *)&term_current_rollback_info, sizeof(term_rollback_info), 1, f);
   assert(success);
 }
@@ -547,8 +547,8 @@ void write_module_term(FILE *f)
 
 void update_module_term(translation t, FILE *f)
 {
-  int success;
-  success = fread((void *)&term_current_rollback_info, sizeof(term_rollback_info), 1, f);
+  int success = 1;
+  success &= fread((void *)&term_current_rollback_info, sizeof(term_rollback_info), 1, f);
   assert(success);
   update_pointer(t, (void **)&term_current_rollback_info);
 }

@@ -26,11 +26,11 @@ region_dir = ../libcompat
 #endif
 
 ifdef DEBUG
-CFLAGS = -g -pg -Wall -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../andersen -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing 
-CFLAGS_SG = -g -pg -Wall -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../steensgaard -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing
+CFLAGS = -g -pg -Wall -Werror -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../andersen -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing 
+CFLAGS_SG = -g -pg -Wall -Werror -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../steensgaard -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing
 else
-CFLAGS = -Wall -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../andersen -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC -O3 $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing 
-CFLAGS_SG = -Wall -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../steensgaard -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC -O3 $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing 
+CFLAGS = -Wall -Werror -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../andersen -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC -O3 $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing 
+CFLAGS_SG = -Wall -Werror -Wno-char-subscripts -I. -I$(region_dir) -I../engine -I../steensgaard -Ddeletes= -Dtraditional= -Dsameregion=  -Dparentptr= -DUSEMALLOC -O3 $(ARCH_FLAGS) $(EXTRACFLAGS) -Itests/rc/original  -fno-strict-aliasing 
 endif
 
 ifndef NO_BANSHEE_ROLLBACK
