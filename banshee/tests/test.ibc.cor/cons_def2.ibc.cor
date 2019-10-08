@@ -1,5 +1,0 @@
-constructor: u
-constructor: v
-var: 'x
-constructor: c
-{c(u,v)}

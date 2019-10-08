@@ -1,5 +1,0 @@
-var: 'u
-var: 'v
-var: 'x
-constructor: c
-{c('u,'v)}

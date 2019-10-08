@@ -1,6 +1,0 @@
-constructor: a
-var: 'x
-var: 'y
-constructor: c
-{c(a,a)}
-{a}
