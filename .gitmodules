@@ -1,0 +1,4 @@
+[submodule "cil"]
+	path = cil
+	url = https://github.com/goblint/cil.git
+	branch = locksmith
