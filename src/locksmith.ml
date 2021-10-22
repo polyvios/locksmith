@@ -49,7 +49,8 @@ let listphase = ref false
 let version = "$Rev: 5624 $"
 
 let print_version () =
-  output_string stdout ("LockSmith build #"^version)
+  print_endline ("LockSmith version: " ^ version); 
+  exit 0
 
 
 let feature : featureDescr = {
