@@ -68,7 +68,7 @@ end
 let removeAliasAttr = visitCilFile (new rmAliasVisitor (H.create 1) (H.create 1))
 
 (* should be disabled by default, debug use only: *)
-let feature : featureDescr =
+let feature : Feature.t =
   { fd_name = "rmalias";
     fd_enabled = ref false;
     fd_description = "remove \"alias\" attribute";
@@ -77,3 +77,4 @@ let feature : featureDescr =
     fd_post_check = false;
   }
  
+let () = Feature.register feature
