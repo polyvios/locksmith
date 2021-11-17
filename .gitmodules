@@ -2,3 +2,6 @@
 	path = cil
 	url = https://github.com/goblint/cil.git
 	branch = locksmith
+[submodule "banshee"]
+	path = banshee
+	url = git@github.com:polyvios/banshee.git
