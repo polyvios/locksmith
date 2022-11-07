@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+eval $(opam config env)
 ./configure
 if ! make; then
   echo "Rebuild banshee"
