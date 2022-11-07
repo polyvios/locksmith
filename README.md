@@ -10,7 +10,7 @@ The following should work on a fresh installation of Ubuntu 22.04.
 Clone this repository and run the following in the checked out directory:
 
 ```console
-sudo apt install gcc opam autoconf automake make gperf python3 indent emacs flex bison
+sudo apt install gcc opam autoconf automake make gperf python3 indent emacs flex libfl-dev bison
 git submodule update --init --recursive
 opam init -n
 opam switch create . 3.11.2

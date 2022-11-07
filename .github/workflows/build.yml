@@ -29,7 +29,7 @@ jobs:
           opam-depext: false
 
       - name: Install Ubuntu packages
-        run: sudo apt install -y gcc opam autoconf automake make gperf python3 indent emacs flex bison
+        run: sudo apt install -y gcc opam autoconf automake make gperf python3 indent emacs flex libfl-dev bison
 
       - name: Build Locksmith
         run: ./scripts/build.sh
