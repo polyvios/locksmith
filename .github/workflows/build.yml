@@ -26,6 +26,7 @@ jobs:
         uses: ocaml/setup-ocaml@v2
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
+          opam-depext: false
 
       - name: Install Ubuntu packages
         run: sudo apt install -y gcc opam autoconf automake make gperf python3 indent emacs flex bison
