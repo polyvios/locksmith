@@ -31,7 +31,7 @@ jobs:
         run: sudo apt install -y gcc opam autoconf automake make gperf python3 indent emacs flex bison
 
       - name: Build Locksmith
-      - run: ./scripts/build.sh
+        run: ./scripts/build.sh
 
       - name: Test
         run: ./scripts/test.sh
