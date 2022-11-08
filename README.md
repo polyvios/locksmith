@@ -15,7 +15,7 @@ Clone this repository and run the following in the checked out directory:
 sudo apt install gcc opam autoconf automake make gperf python3 indent emacs flex libfl-dev bison
 git submodule update --init --recursive
 opam init -n
-opam switch create . 3.11.2
+opam switch create . 4.03.0
 eval $(opam env --switch=. --set-switch)
 ./configure
 make

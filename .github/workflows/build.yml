@@ -12,7 +12,7 @@ jobs:
         os:
           - ubuntu-22.04
         ocaml-compiler:
-          - 3.11.2
+          - 4.03.0
 
     runs-on: ${{ matrix.os }}
 

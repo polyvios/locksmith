@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
-
 eval $(opam config env)
+opam install -y camlp4
 ./configure
-if ! make; then
-  echo "Rebuild banshee"
-  cd banshee
-  make
-  git checkout -- .
-  git clean -df
-  make
-  echo "Now retry Locksmith"
-  cd ..
-  make
-fi
+make
