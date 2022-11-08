@@ -31,6 +31,9 @@ jobs:
       - name: Install Ubuntu packages
         run: sudo apt install -y gcc autoconf automake make gperf python3 indent emacs flex libfl-dev bison
 
+      - name: Install Opam packages
+        run: opam install -y camlp4 
+          
       - name: Build Locksmith
         run: ./scripts/build.sh
 
