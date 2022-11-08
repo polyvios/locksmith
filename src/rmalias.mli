@@ -46,4 +46,4 @@
 val removeAliasAttr : Cil.file -> unit
 
 (* Enables using as a cil module.  Disabled by default *)
-val feature : Feature.t
+val feature : Cil.featureDescr

@@ -36,5 +36,5 @@
  *)
 val getLiveSet : int -> Usedef.VS.t option
 val computeLiveness : Cil.fundec -> unit
-val feature : Feature.t
+val feature : Cil.featureDescr
 val options : (string * Arg.spec * string) list

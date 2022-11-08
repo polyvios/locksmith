@@ -1,0 +1,42 @@
+name: Build workflow
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-22.04
+        ocaml-compiler:
+          - 4.03.0
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with: 
+          submodules: recursive
+
+      - name: Use OCaml ${{ matrix.ocaml-compiler }}
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: ${{ matrix.ocaml-compiler }}
+          opam-depext: false
+
+      - name: Install Ubuntu packages
+        run: sudo apt install -y gcc autoconf automake make gperf python3 indent emacs flex libfl-dev bison
+
+      - name: Install Opam packages
+        run: opam install -y camlp4 
+          
+      - name: Build Locksmith
+        run: ./scripts/build.sh
+
+      - name: Test
+        run: ./scripts/test.sh
+        

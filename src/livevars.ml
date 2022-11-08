@@ -194,7 +194,7 @@ class liveVarsFunVisitor : cilVisitor = object (self)
 end
 
 (* should be disabled by default, debug use only: *)
-let feature : Feature.t =
+let feature : featureDescr =
   { fd_name = "livevars";
     fd_enabled = ref false;
     fd_description = "live variable sets";
